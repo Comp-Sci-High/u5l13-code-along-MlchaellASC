@@ -45,8 +45,25 @@
           <div class="teacher-card-content">
             <h2><%= teachers[i].name %></h2>
             <p><strong>Department:</strong> <%= teachers[i].department %></p>
-            <!-- Add a button that calls a deleteTeacher function with their id passed as input -->
-             <button onClick ="deleteTeacher('<%= teachers [i].id %>')">Delete Teacher</button>
+            
+            <!-- Edit Form (Hidden by default) -->
+            <form id="edit-form-<%= teachers[i].id %>" style="display: none;">
+              <label>Name: </label>
+              <input type="text" name="edit-name-<%= teachers[i].id %>" value="<%= teachers[i].name %>" required />
+              
+              <label>Department: </label>
+              <input type="text" name="edit-department-<%= teachers[i].id %>" value="<%= teachers[i].department %>" />
+              
+              <label>Image: </label>
+              <input type="text" name="edit-image-<%= teachers[i].id %>" value="<%= teachers[i].image %>" />
+              
+              <button type="button" onClick="updateTeacher('<%= teachers[i].id %>')">Save</button>
+              <button type="button" onClick="toggleEditForm('<%= teachers[i].id %>')">Cancel</button>
+            </form>
+            
+            <!-- Action Buttons -->
+            <button onClick="toggleEditForm('<%= teachers[i].id %>')">Edit Teacher</button>
+            <button onClick="deleteTeacher('<%= teachers[i].id %>')">Delete Teacher</button>
           </div>
         </div>
       <% } %>

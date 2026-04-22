@@ -57,7 +57,28 @@
             </div>
             <p><strong>Comment:</strong> <%= ratings[i].comment %></p>
             <p><em>By: <%= ratings[i].username %></em></p>
-            <!-- Add a button that calls a deleteRating function with its id passed as input -->
+            
+            <!-- Edit Form (Hidden by default) -->
+            <form id="edit-form-<%= ratings[i].id %>" style="display: none;">
+              <label>Username: </label>
+              <input type="text" name="edit-username-<%= ratings[i].id %>" value="<%= ratings[i].username %>" />
+              
+              <label>Teacher: </label>
+              <input type="text" name="edit-teacher-<%= ratings[i].id %>" value="<%= ratings[i].teacher %>" />
+              
+              <label>Comment: </label>
+              <input type="text" name="edit-comment-<%= ratings[i].id %>" value="<%= ratings[i].comment %>" />
+              
+              <label>Rating: </label>
+              <input type="number" name="edit-rating-<%= ratings[i].id %>" value="<%= ratings[i].rating %>" min="1" max="5" />
+              
+              <button type="button" onClick="updateRating('<%= ratings[i].id %>')">Save</button>
+              <button type="button" onClick="toggleEditForm('<%= ratings[i].id %>')">Cancel</button>
+            </form>
+            
+            <!-- Action Buttons -->
+            <button onClick="toggleEditForm('<%= ratings[i].id %>')">Edit Rating</button>
+            <button onClick="deleteRating('<%= ratings[i].id %>')">Delete Rating</button>
 
           </div>
         </div>

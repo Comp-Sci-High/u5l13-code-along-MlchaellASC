@@ -73,6 +73,35 @@ app.delete("/teachers/:id", async (req, res) => {
   res.json(resp)
 })
 
+// Create a dynamic PATCH route to update a teacher by their ID
+app.patch("/teachers/:id", async (req, res) => {
+  const updatedTeacher = await Teacher.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.name,
+      department: req.body.department,
+      image: req.body.image
+    },
+    { new: true }
+  );
+  res.json(updatedTeacher);
+})
+
+
+// Create a dynamic PATCH route to update a rating by their ID
+app.patch("/ratings/:id", async (req, res) => {
+  const updatedRating = await Rating.findByIdAndUpdate(
+    req.params.id,
+    {
+      username: req.body.username,
+      teacher: req.body.teacher,
+      comment: req.body.comment,
+      rating: req.body.rating
+    },
+    { new: true }
+  );
+  res.json(updatedRating);
+})
 
 // Create a dynamic delete route to remove a rating by it's ID
   
@@ -80,7 +109,7 @@ app.delete("/teachers/:id", async (req, res) => {
   const response = await Rating.findOneAndDelete({_id: req.params.id})
   res.json(response)
 })
-
+  
 async function startServer() {
   await mongoose.connect(
     "mongodb+srv://SE12:CSH2026@cluster0.ytvmkmf.mongodb.net/?appName=Cluster0"
